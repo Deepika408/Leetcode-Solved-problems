@@ -10,71 +10,41 @@ class Solution{
     int closest3Sum(int A[], int N, int X)
     {
         // code here
-       sort(A, A+N);
-
-        int ans = 1e9;
-
-        for(int i=0; i<N; i++){
-
-            int j = i+1;
-
-            int k = N-1;
-
-            
-
-            while(j < k){
-
-                int sum = A[i] + A[j] + A[k];
-
-                if(sum < X){
-
-                    int diff_1 = abs(ans - X);
-
-                    int diff_2 = abs(sum - X);
-
-                    if(diff_2 < diff_1)
-                    {
-
-                        ans = sum;
-
-                    }
-
-                    j++;
-
-                }
-
-                else if(sum > X)
+        int target=X;
+        sort(A,A+N);
+        int cls=1e6;
+        for(int i=0;i<N;i++)
+        {
+            int str=i+1;
+            int end=N-1;
+            while(str<end){
+                int sum=A[i]+A[str]+A[end];
+                if(sum<target)
                 {
-
-                    int diff_1 = abs(ans - X);
-
-                    int diff_2 = abs(sum - X);
-
-                    if(diff_2 < diff_1)
-                    {
-
-                        ans = sum;
-
+                    int d1=abs(cls-target);
+                    int d2=abs(sum-target);
+                    if(d2<d1){
+                        cls=sum;
                     }
-
-                    k--;
-
+                    str++;
                 }
-
-                else if(sum == X)
+                else if(sum>target)
+                 {
+                    int d1=abs(cls-target);
+                    int d2=abs(sum-target);
+                    if(d2<d1){
+                        cls=sum;
+                    }
+                    end--;
+                }
+                else if(sum==target)
                 {
-
-                    ans = X;
-
+                    cls=target;
                     break;
-
                 }
-
             }
-
         }
-
-        return ans;  
+        return cls;
     }
 };
 
